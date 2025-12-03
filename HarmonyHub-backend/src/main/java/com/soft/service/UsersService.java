@@ -2,6 +2,7 @@ package com.soft.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.soft.dto.RegisterDTO;
+import com.soft.dto.RegisterResponseDTO;
 import com.soft.entity.User;
 import com.soft.repository.UserRepository;
 
@@ -16,7 +17,12 @@ public class UsersService {
         this.passwordEncoder=passwordEncoder;
     }
 
-    public User registerUser(RegisterDTO dto) {
+    public RegisterResponseDTO registerUser(RegisterDTO dto) {
+
+        if(userrepo.existsByEmail(dto.getEmail())){
+            throw new IllegalStateException("Email Already Exists");
+        }
+        
         User user = new User();
         user.setName(dto.getName());
         user.setEmail(dto.getEmail());
@@ -27,6 +33,19 @@ public class UsersService {
         user.setTalent(dto.getTalent());
         user.setRole("USER");
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
-        return userrepo.save(user);
+        User response= userrepo.save(user);
+        return mapToResponseDTO(response);
+    }
+    
+    private RegisterResponseDTO mapToResponseDTO(User user) {
+        RegisterResponseDTO dto = new RegisterResponseDTO();
+        dto.setArea(user.getArea());
+        dto.setCity(user.getCity());
+        dto.setEmail(user.getEmail());
+        dto.setLevel(user.getLevel());
+        dto.setName(user.getName());
+        dto.setTalent(user.getTalent());
+        dto.setState(user.getState());
+        return dto;
     }
 }
