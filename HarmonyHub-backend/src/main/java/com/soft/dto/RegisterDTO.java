@@ -58,5 +58,21 @@ public class RegisterDTO {
     }
     public void setLevel(MusicianLevel level) {
         this.level = level;
-    }    
+    }
+	public RegisterDTO(String name, String email, String password, String talent, String state, String city,
+			String area, MusicianLevel level) {
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.talent = talent;
+		this.state = state;
+		this.city = city;
+		this.area = area;
+		this.level = level;
+	}
+	public RegisterDTO() {
+	}    
+	
+	
+    
 }

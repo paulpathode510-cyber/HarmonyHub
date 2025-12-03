@@ -8,8 +8,10 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="mucicians")
 public class User {
     
     @Id
@@ -122,4 +124,25 @@ public class User {
     public String getRole() {
         return role;
     }
+
+	public User(Integer id, String name, String email, String password, String talent, String state, String city,
+			String area, MusicianLevel level, String role) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.talent = talent;
+		this.state = state;
+		this.city = city;
+		this.area = area;
+		this.level = level;
+		this.role = role;
+	}
+
+	public User() {
+		
+	}
+    
+	
+    
 }
