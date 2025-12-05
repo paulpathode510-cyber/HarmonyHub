@@ -1,6 +1,8 @@
 package com.soft.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.soft.dto.LoginDTO;
 import com.soft.dto.RegisterDTO;
 import com.soft.dto.RegisterResponseDTO;
 import com.soft.entity.User;
@@ -11,10 +13,12 @@ public class UsersService {
 
     private final UserRepository userrepo;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
-    public UsersService(UserRepository userrepo,PasswordEncoder passwordEncoder) {
+    public UsersService(UserRepository userrepo,PasswordEncoder passwordEncoder,JwtService jwtService) {
         this.userrepo = userrepo;
         this.passwordEncoder=passwordEncoder;
+        this.jwtService=jwtService;
     }
 
     public RegisterResponseDTO registerUser(RegisterDTO dto) {
@@ -36,8 +40,22 @@ public class UsersService {
         User response= userrepo.save(user);
         return mapToResponseDTO(response);
     }
+
+
+    public RegisterResponseDTO loginRequest(LoginDTO dto) {
+        User user= userrepo.findByEmail(dto.getEmail()).orElseThrow(() -> new RuntimeException("Email Not Registered"));
+
+        if(!passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Credentials Do Not match");
+        }
+
+        return mapToResponseDTO(user);
+    }
     
     private RegisterResponseDTO mapToResponseDTO(User user) {
+
+        String token = jwtService.generatToken(user);
+
         RegisterResponseDTO dto = new RegisterResponseDTO();
         dto.setArea(user.getArea());
         dto.setCity(user.getCity());
@@ -46,6 +64,7 @@ public class UsersService {
         dto.setName(user.getName());
         dto.setTalent(user.getTalent());
         dto.setState(user.getState());
+        dto.setToken(token);
         return dto;
     }
 }

@@ -10,6 +10,7 @@ public class RegisterResponseDTO {
     private String area;
     private String state;
     private MusicianLevel level;
+    private String token;
     public String getName() {
         return name;
     }
@@ -53,7 +54,7 @@ public class RegisterResponseDTO {
         this.level = level;
     }
     public RegisterResponseDTO(String name, String email, String talent, String city, String area, String state,
-            MusicianLevel level) {
+            MusicianLevel level,String token) {
         this.name = name;
         this.email = email;
         this.talent = talent;
@@ -61,8 +62,15 @@ public class RegisterResponseDTO {
         this.area = area;
         this.state = state;
         this.level = level;
+        this.token=token;
     }
     public RegisterResponseDTO() {
+    }
+    public String getToken() {
+        return token;
+    }
+    public void setToken(String token) {
+        this.token = token;
     }
 
 }

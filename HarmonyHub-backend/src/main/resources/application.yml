@@ -19,3 +19,8 @@ spring:
 
 server:
   port: 9992
+
+jwt:
+  secret: ZGVtb19zZWNyZXRfa2V5XzI1Nl9iaXQ=
+  expiration: 86400000
+

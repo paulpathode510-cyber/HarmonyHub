@@ -12,5 +12,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleExistingEmail(IllegalStateException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    }
     
 }
