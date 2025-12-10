@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import com.soft.dto.LoginDTO;
 import com.soft.dto.RegisterDTO;
 import com.soft.dto.RegisterResponseDTO;
+import com.soft.dto.UpdateProfileDTO;
+import com.soft.dto.UpdateProfileResponseDTO;
 import com.soft.dto.UserListDTO;
 import com.soft.entity.User;
 import com.soft.repository.UserRepository;
@@ -84,5 +86,31 @@ public class UsersService {
         dto.setName(user.getName());
         dto.setTalent(user.getTalent());
         return dto;
+    }
+
+
+
+
+    public UpdateProfileResponseDTO updateUserProfile(String jwtemail,UpdateProfileDTO dto) {
+        UpdateProfileResponseDTO respose = new UpdateProfileResponseDTO();
+        User user = userrepo.findByEmail(jwtemail).orElseThrow(() -> new RuntimeException("Email Not Register"));
+        //Database(Entiy Setup)
+        user.setArea(dto.getArea());
+        user.setCity(dto.getCity());
+        user.setLevel(dto.getLevel());
+        user.setName(dto.getName());
+        user.setTalent(dto.getTalent());
+        user.setState(dto.getState());
+        User savedUser=userrepo.save(user);
+
+        //Response setUp
+        respose.setArea(savedUser.getArea());
+        respose.setCity(savedUser.getCity());
+        respose.setEmail(savedUser.getEmail());
+        respose.setLevel(savedUser.getLevel());
+        respose.setName(savedUser.getName());
+        respose.setState(savedUser.getState());
+        respose.setTalent(savedUser.getTalent());
+        return respose;
     }
 }
