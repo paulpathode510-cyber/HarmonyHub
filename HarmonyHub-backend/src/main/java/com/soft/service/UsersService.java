@@ -1,10 +1,13 @@
 package com.soft.service;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.soft.dto.LoginDTO;
 import com.soft.dto.RegisterDTO;
 import com.soft.dto.RegisterResponseDTO;
+import com.soft.dto.UserListDTO;
 import com.soft.entity.User;
 import com.soft.repository.UserRepository;
 
@@ -65,6 +68,21 @@ public class UsersService {
         dto.setTalent(user.getTalent());
         dto.setState(user.getState());
         dto.setToken(token);
+        return dto;
+    }
+
+
+    public Page<UserListDTO> findPage(String talent,String city,Pageable pageable) {
+        return userrepo.findUser(talent, city, pageable).map((user)->mapToFindPage(user));
+    }
+
+    private UserListDTO mapToFindPage(User user) {
+        UserListDTO dto = new UserListDTO();
+        dto.setCity(user.getCity());
+        dto.setId(user.getId());
+        dto.setLevel(user.getLevel());
+        dto.setName(user.getName());
+        dto.setTalent(user.getTalent());
         return dto;
     }
 }
