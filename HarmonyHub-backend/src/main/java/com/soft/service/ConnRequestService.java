@@ -1,8 +1,12 @@
 package com.soft.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.soft.dto.ConnectionRequestDTO;
+import com.soft.dto.MyConnRequListDTO;
 import com.soft.entity.ConnectionRequest;
 import com.soft.entity.User;
 import com.soft.enums.RequestStatus;
@@ -39,4 +43,30 @@ public class ConnRequestService {
         connRequestRepository.save(connect);
         return "Connection Send Successfully";
     }
+
+
+    public List<MyConnRequListDTO> getConnectionRequestList(String authemail) {
+        String token = authemail.substring(7);
+        String email = jwtService.extractUsername(token);
+        User loggedInUser = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Email Not register"));
+        List<ConnectionRequest> list = connRequestRepository.findByReceiverId(loggedInUser.getId());
+        List<MyConnRequListDTO> finaldto = new ArrayList<>();
+        for(ConnectionRequest lis : list) {
+            MyConnRequListDTO mydto = new MyConnRequListDTO();
+            mydto.setSenderId(lis.getSender().getId());
+            mydto.setSenderCity(lis.getSender().getCity());
+            mydto.setSenderLevel(lis.getSender().getLevel().name());
+            mydto.setSenderState(lis.getSender().getState());
+            mydto.setSenderTalent(lis.getSender().getTalent());
+            mydto.setSenderName(lis.getSender().getName());
+            mydto.setStatus(lis.getStatus().name());
+
+            finaldto.add(mydto);
+        }
+        return finaldto;
+    }
+
+
+
+
 }
