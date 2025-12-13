@@ -31,4 +31,8 @@ public class ConnectionController {
         return ResponseEntity.ok(connRequestService.getConnectionRequestList(authHead));
     }
     
+    @GetMapping("/coonection-sentrequest-list")
+    public ResponseEntity<?> getMySentRequestsList(@RequestHeader("Authorization") String authHead) {
+        return ResponseEntity.ok(connRequestService.sentRequestList(authHead));
+    }
 }

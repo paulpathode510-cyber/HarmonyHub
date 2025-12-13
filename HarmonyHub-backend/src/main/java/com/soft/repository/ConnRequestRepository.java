@@ -11,4 +11,5 @@ import com.soft.entity.ConnectionRequest;
 public interface ConnRequestRepository extends JpaRepository<ConnectionRequest,Integer> {
     boolean existsBySenderIdAndReceiverId(Integer senderId,Integer receiverId);
     List<ConnectionRequest> findByReceiverId(Integer receiverid);
+    List<ConnectionRequest> findBySenderId(Integer senderid);
 }

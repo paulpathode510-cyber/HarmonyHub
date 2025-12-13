@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.soft.dto.ConnectionRequestDTO;
 import com.soft.dto.MyConnRequListDTO;
+import com.soft.dto.MySendReqListDTO;
 import com.soft.entity.ConnectionRequest;
 import com.soft.entity.User;
 import com.soft.enums.RequestStatus;
@@ -66,6 +67,29 @@ public class ConnRequestService {
         return finaldto;
     }
 
+
+    public List<MySendReqListDTO> sentRequestList(String autHeader) {
+        String token = autHeader.substring(7);
+        String email = jwtService.extractUsername(token);
+        User loggedInuser = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Email not registered"));
+        List<ConnectionRequest> requests = connRequestRepository.findBySenderId(loggedInuser.getId());
+        List<MySendReqListDTO> finaldto = new ArrayList<>();
+
+        for(ConnectionRequest list: requests) {
+            MySendReqListDTO dto = new MySendReqListDTO();
+            dto.setSentToname(list.getReceiver().getName());
+            dto.setSentTocity(list.getReceiver().getCity());
+            dto.setSentTolevel(list.getReceiver().getLevel().name());
+            dto.setSentTostate(list.getReceiver().getState());
+            dto.setSentTostatus(list.getStatus().name());
+            dto.setSentTotalent(list.getReceiver().getTalent());
+            dto.setSentToid(list.getReceiver().getId());
+
+            finaldto.add(dto);
+        }
+
+        return finaldto;
+    }
 
 
 
