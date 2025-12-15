@@ -54,6 +54,7 @@ public class ConnRequestService {
         List<MyConnRequListDTO> finaldto = new ArrayList<>();
         for(ConnectionRequest lis : list) {
             MyConnRequListDTO mydto = new MyConnRequListDTO();
+            mydto.setRequestId(lis.getId());
             mydto.setSenderId(lis.getSender().getId());
             mydto.setSenderCity(lis.getSender().getCity());
             mydto.setSenderLevel(lis.getSender().getLevel().name());
@@ -91,6 +92,28 @@ public class ConnRequestService {
         return finaldto;
     }
 
+    public String acceptanceOfReqeust(String authHead, Integer requestId, boolean accepts) {
+        String token = authHead.substring(7);
+        String email = jwtService.extractUsername(token);
+        User loggedInuser = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Email not registered"));
+
+        ConnectionRequest request = connRequestRepository.findById(requestId).orElseThrow(() -> new RuntimeException("No Request Found with this id"));
+
+        if(!request.getReceiver().getId().equals(loggedInuser.getId())) {
+            throw new RuntimeException("You are not allowed to act on this Request");
+        }
+
+        if(accepts) {
+            request.setStatus(RequestStatus.ACCEPTED);
+            connRequestRepository.save(request);
+            return "Request Accepted";
+        } else {
+            request.setStatus(RequestStatus.REJECTED);
+            connRequestRepository.save(request);
+            return "Request Rejected";
+        }
+    }
+    
 
 
 }

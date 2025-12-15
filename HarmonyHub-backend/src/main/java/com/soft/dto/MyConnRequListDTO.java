@@ -1,6 +1,7 @@
 package com.soft.dto;
 
 public class MyConnRequListDTO {
+    private Integer requestId;
     private Integer senderId;
     private String senderName;
     private String senderCity;
@@ -50,8 +51,15 @@ public class MyConnRequListDTO {
     public String getStatus() {
         return status;
     }
+    
     public void setStatus(String status) {
         this.status = status;
+    }
+    public Integer getRequestId() {
+        return requestId;
+    }
+    public void setRequestId(Integer requestId) {
+        this.requestId = requestId;
     }
     
 }
