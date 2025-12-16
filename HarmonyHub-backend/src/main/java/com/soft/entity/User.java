@@ -1,5 +1,4 @@
 package com.soft.entity;
-import org.antlr.v4.runtime.misc.NotNull;
 import com.soft.enums.MusicianLevel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,31 +17,31 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
+    @Column(nullable = false)
     private String name;
 
-    @NotNull
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
-    @NotNull
+    @Column(nullable = false)
     private String password;
 
-    @NotNull
+    @Column(nullable = false)
     private String talent;
 
-    @NotNull
+    @Column(nullable = false)
     private String state;
 
-    @NotNull
+    @Column(nullable = false)
     private String city;
 
-    @NotNull
+    @Column(nullable = false)
     private String area;
 
     @Enumerated(EnumType.STRING)
     private MusicianLevel level;
 
+    @Column(nullable = false)
     private String role;
 
     public Integer getId() {
