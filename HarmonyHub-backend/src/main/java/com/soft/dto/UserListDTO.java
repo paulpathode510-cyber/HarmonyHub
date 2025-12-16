@@ -1,3 +1,12 @@
+/*
+User List DTO is for sending the List of Other users to the specific Users
+
+All Other User who are signed up in the application will be sent via(Pagination)
+Specific amount of user per request
+
+Response DTO
+*/
+
 package com.soft.dto;
 
 import com.soft.enums.MusicianLevel;

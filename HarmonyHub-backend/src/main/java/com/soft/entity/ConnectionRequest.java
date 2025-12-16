@@ -1,3 +1,10 @@
+/*This is the connection-Request entity 
+
+It will consist the ID's of user in (SenderId, ReceiverId)
+which will be mapped to the Users table with foreign key
+
+*/
+
 package com.soft.entity;
 
 import java.time.LocalDateTime;

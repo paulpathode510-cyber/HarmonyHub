@@ -1,3 +1,8 @@
+/*
+This DTO is for Showing the outgoing request from currently loggend-In user
+*/
+
+//ResponseDTO
 package com.soft.dto;
 
 public class MySendReqListDTO {

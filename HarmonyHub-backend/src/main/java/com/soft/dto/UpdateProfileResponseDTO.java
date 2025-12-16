@@ -1,3 +1,10 @@
+/*
+This is the Response that will be sent back to the user once the profile is update
+
+*Updated field will be automatically updated and sent to the user
+*/
+
+//ResponseDTO
 package com.soft.dto;
 
 import com.soft.enums.MusicianLevel;

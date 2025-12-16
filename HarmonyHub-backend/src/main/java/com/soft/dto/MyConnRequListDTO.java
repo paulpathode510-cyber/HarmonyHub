@@ -1,3 +1,13 @@
+/* This DTO is a responseDTO that is send the loggedIn user 
+   This DTO contains the information about the person who have send you the connection-Request 
+   it also contains the request Id for future reference
+   This is Single persons DTO, later on before Sending on front end List<MyConnRequListDTO> is sent to user
+
+   *This is the Incoming Requests for User 
+*/
+
+
+//This is ResponseDTO
 package com.soft.dto;
 
 public class MyConnRequListDTO {

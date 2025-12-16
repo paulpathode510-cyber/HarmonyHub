@@ -1,5 +1,12 @@
-package com.soft.dto;
+/*
+When the User Registered than it will be automatically shifted to the Home page of web application so it will require the basic details of User
 
+This DTO is the Response DTO that will be immediately send to the user once he registers to the application
+
+*This is ResponseDTO
+*/
+
+package com.soft.dto;
 import com.soft.enums.MusicianLevel;
 
 public class RegisterResponseDTO {

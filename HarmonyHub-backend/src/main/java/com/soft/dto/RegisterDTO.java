@@ -1,3 +1,8 @@
+/*
+This DTO is designed for Accepting the required field that are mandatory for Registering a new users
+*/
+
+//RequestDTO
 package com.soft.dto;
 
 import com.soft.enums.MusicianLevel;

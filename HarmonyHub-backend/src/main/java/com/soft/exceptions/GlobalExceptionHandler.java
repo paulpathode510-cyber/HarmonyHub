@@ -1,3 +1,9 @@
+/*
+This is the Global Exceptin Handler class 
+which will intercept all the exception thrown by the service or controller method and convert that exception into meaningfull HttpResponse
+It is also called as Middle layer
+*/
+
 package com.soft.exceptions;
 
 import org.springframework.http.HttpStatus;
@@ -5,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+//Annotaion for Global Exception Handler
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 

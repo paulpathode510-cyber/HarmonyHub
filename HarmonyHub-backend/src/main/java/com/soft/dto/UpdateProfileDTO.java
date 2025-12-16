@@ -1,3 +1,12 @@
+/*
+This is Update profile DTO Which is Used to take the Input from users which will consist the Changed Fields
+updates like:
+        1.Changed name 
+        2.talent
+        etc
+
+        This is the RequestDTO
+*/
 package com.soft.dto;
 
 import com.soft.enums.MusicianLevel;

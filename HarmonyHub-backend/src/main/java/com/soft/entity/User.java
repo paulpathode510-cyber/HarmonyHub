@@ -1,3 +1,5 @@
+//This is the Users Entity All the fields which are here will be mapped to the databse(PostgraceSQL) via ORM(Hibernate)
+
 package com.soft.entity;
 import com.soft.enums.MusicianLevel;
 import jakarta.persistence.Column;
@@ -41,6 +43,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private MusicianLevel level;
 
+
+    //Role Based Access
     @Column(nullable = false)
     private String role;
 
